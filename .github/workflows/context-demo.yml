@@ -10,8 +10,14 @@ jobs:
     Analysis:
         name: Erste Analyse
         runs-on: ubuntu-latest
+        outputs:
+          secret-message: ${{ steps.get_secret_message.outputs.message }}
 
         steps:
+            - name: Commit Message lesen
+              id: get_secret_message
+              run: echo "message=Wuhuu!" >> "$GITHUB_OUTPUT"
+
             - name: Zeige GitHub Kontext
               run: echo '${{ toJson(github) }}'
 
@@ -20,3 +26,13 @@ jobs:
 
             - name: Zeige Runner Kontext
               run: echo '${{ toJson(runner) }}'
+
+    job2:
+        name: Zeige Werte aus Job 1 (Analysis)
+        runs-on: ubuntu-latest
+        needs: Analysis
+        
+        steps:
+          - name: Outputs anzeigen
+            run: |
+             echo "Geheime Message aus Job 1: ${{ needs.Analysis.outputs.secret-message }}"
