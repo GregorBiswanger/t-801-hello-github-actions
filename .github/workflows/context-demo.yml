@@ -14,6 +14,9 @@ jobs:
           secret-message: ${{ steps.get_secret_message.outputs.message }}
 
         steps:
+            - name: Zeige unser Geheimnis
+              run: echo "Geheimnis lautet:" ${{ secrets.MY_SECRET }} 
+
             - name: Commit Message lesen
               id: get_secret_message
               run: echo "message=Wuhuu!" >> "$GITHUB_OUTPUT"
@@ -31,7 +34,7 @@ jobs:
         name: Zeige Werte aus Job 1 (Analysis)
         runs-on: ubuntu-latest
         needs: Analysis
-        
+
         steps:
           - name: Outputs anzeigen
             run: |
