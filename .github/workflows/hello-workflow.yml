@@ -10,7 +10,11 @@ jobs:
     say-hello:
         runs-on: ubuntu-latest
         steps:
-            - run: pwd && ls -al
-            - uses: actions/checkout@v4
-            - run: pwd && ls -al
-            
+            - name: Aktuelles Verzeichnis ansehen
+              run: pwd && ls -al
+
+            - name: Checkout der Dateien
+              uses: actions/checkout@v4
+
+            - name: Aktuelles Verzeichnis ansehen
+              run: pwd && ls -al
