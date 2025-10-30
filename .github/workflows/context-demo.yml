@@ -23,6 +23,12 @@ jobs:
               if: env.GEHEIM == 'I love Datev'
               run: echo "Viel liebe für Datev"
 
+            - name: Secret auf Datev (production) prüfen
+              env: 
+                GEHEIM: ${{ secrets.MY_SECRET }}
+              if: env.GEHEIM == 'I love really Datev'
+              run: echo "Viel liebe für Datev (Production Version)"
+
             - name: Commit Message lesen
               id: get_secret_message
               run: echo "message=Wuhuu!" >> "$GITHUB_OUTPUT"
